@@ -4,7 +4,10 @@ use std::{
     path::PathBuf,
 };
 
-use crate::{Error, Method, request::Request, types::result::Result};
+use crate::{
+    Error, Method,
+    types::{request::Request, result::Result},
+};
 
 pub fn parse_request(request: &TcpStream) -> Result<Request> {
     let buffer = BufReader::new(request);

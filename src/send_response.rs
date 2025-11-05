@@ -5,10 +5,9 @@ use std::{
 };
 
 use crate::{
-    request::Request,
     types::{
-        error::Error, method::Method, response::Response, response_status::ResponseStatus,
-        result::Result,
+        error::Error, method::Method, request::Request, response::Response,
+        response_status::ResponseStatus, result::Result,
     },
     utils::read_file::read_file,
 };

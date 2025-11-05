@@ -7,7 +7,6 @@ use crate::{
 };
 
 pub mod parse_request;
-pub mod request;
 pub mod send_response;
 pub mod types;
 pub mod utils;
