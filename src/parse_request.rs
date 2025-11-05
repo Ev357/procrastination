@@ -24,13 +24,8 @@ pub fn parse_request(request: &TcpStream) -> Result<Request> {
             let mut parts = line.split_whitespace();
             let method = Method::from(parts.next().ok_or(Error::InvalidMethod)?);
             let path = PathBuf::from(parts.next().ok_or(Error::InvalidPath)?);
-            let version = parts.next().ok_or(Error::InvalidVersion)?.to_string();
 
-            request = Some(Request {
-                method,
-                path,
-                version,
-            });
+            request = Some(Request { method, path });
         }
     }
 

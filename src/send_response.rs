@@ -23,7 +23,7 @@ pub fn send_response(stream: &mut TcpStream, request: &Request) -> Result<()> {
 fn get_response(request: &Request) -> Result<Response> {
     match request.method {
         Method::Get => get_get_response(request),
-        Method::Unknown => get_error_response(&Error::InvalidMethod, request),
+        Method::Unknown => get_error_response(&Error::InvalidMethod),
     }
 }
 
@@ -45,26 +45,24 @@ fn get_get_response(request: &Request) -> Result<Response> {
     let body = read_file(&content_path);
 
     if let Err(error) = body {
-        return get_error_response(&error, request);
+        return get_error_response(&error);
     }
 
     let (body, content_type) = body?;
 
     Ok(Response {
-        version: request.version.clone(),
         status: ResponseStatus::Ok,
         content_type,
         body,
     })
 }
 
-fn get_error_response(error: &Error, request: &Request) -> Result<Response> {
+fn get_error_response(error: &Error) -> Result<Response> {
     match error {
         Error::NotFound(_) => {
             let (error_page, content_type) = read_file(Path::new("./dist/404.html"))?;
 
             Ok(Response {
-                version: request.version.clone(),
                 status: ResponseStatus::NotFound,
                 content_type,
                 body: error_page,
@@ -74,7 +72,6 @@ fn get_error_response(error: &Error, request: &Request) -> Result<Response> {
             let (body, content_type) = read_file(Path::new("./dist/500.html"))?;
 
             Ok(Response {
-                version: request.version.clone(),
                 status: ResponseStatus::InternalServerError,
                 content_type,
                 body,

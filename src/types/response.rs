@@ -2,7 +2,6 @@ use crate::types::response_status::ResponseStatus;
 
 #[derive(Debug)]
 pub struct Response {
-    pub version: String,
     pub status: ResponseStatus,
     pub content_type: String,
     pub body: Vec<u8>,
@@ -11,7 +10,7 @@ pub struct Response {
 impl From<Response> for Vec<u8> {
     fn from(response: Response) -> Self {
         let status: &str = response.status.into();
-        let header = format!("{} {}\r\n", response.version, status);
+        let header = format!("HTTP/1.1 {}\r\n", status);
 
         let content_type = format!("Content-Type: {}\r\n", response.content_type);
 

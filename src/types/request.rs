@@ -6,5 +6,4 @@ use crate::types::method::Method;
 pub struct Request {
     pub method: Method,
     pub path: PathBuf,
-    pub version: String,
 }
