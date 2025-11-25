@@ -33,15 +33,15 @@ fn get_response(request: &Request, configuration: &Configuration) -> Result<Resp
 fn get_content_path(path: &Path, root: &Path) -> Result<PathBuf> {
     let relative_path = path.strip_prefix("/")?;
 
-    let file_path = if relative_path.is_dir() {
-        &relative_path.join("index.html")
+    let content_path = root.join(relative_path);
+
+    let file_path = if content_path.is_dir() {
+        content_path.join("index.html")
     } else {
-        relative_path
+        content_path
     };
 
-    let content_path = root.join(file_path);
-
-    Ok(content_path)
+    Ok(file_path)
 }
 
 fn get_get_response(request: &Request, configuration: &Configuration) -> Result<Response> {

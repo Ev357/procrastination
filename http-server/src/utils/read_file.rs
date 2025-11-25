@@ -7,11 +7,11 @@ use std::{
 use http_server_types::{error::Error, result::Result};
 
 pub fn read_file(path: &Path) -> Result<(Vec<u8>, String)> {
-    let file = File::open(path);
-
     if path.is_dir() || !path.exists() {
         return Err(Error::NotFound(path.to_string_lossy().to_string()));
     }
+
+    let file = File::open(path);
 
     let mut reader = BufReader::new(file?);
 
