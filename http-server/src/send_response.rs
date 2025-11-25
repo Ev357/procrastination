@@ -31,11 +31,15 @@ fn get_response(request: &Request, configuration: &Configuration) -> Result<Resp
 }
 
 fn get_content_path(path: &Path, root: &Path) -> Result<PathBuf> {
-    if path == Path::new("/") {
-        return Ok(root.join("index.html"));
-    }
+    let relative_path = path.strip_prefix("/")?;
 
-    let content_path = root.join(path.strip_prefix("/")?);
+    let file_path = if relative_path.is_dir() {
+        &relative_path.join("index.html")
+    } else {
+        relative_path
+    };
+
+    let content_path = root.join(file_path);
 
     Ok(content_path)
 }
