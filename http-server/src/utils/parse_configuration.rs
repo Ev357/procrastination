@@ -59,7 +59,7 @@ pub struct ParseConfigurationOption {
     pub short: &'static str,
     pub long: &'static str,
     pub help: &'static str,
-    pub type_: &'static ParseConfigurationType,
+    pub r#type: &'static ParseConfigurationType,
     pub default: Option<&'static str>,
 }
 
@@ -68,7 +68,7 @@ pub fn parse_configuration(configuration: &ParseConfiguration) -> Result<Configu
 
     struct FoldState {
         key: String,
-        type_: ParseConfigurationType,
+        r#type: ParseConfigurationType,
     }
 
     let (arguments, options, _) = args.fold(
@@ -80,7 +80,7 @@ pub fn parse_configuration(configuration: &ParseConfiguration) -> Result<Configu
                 });
 
                 if let Some(option) = option {
-                    if let ParseConfigurationType::None = option.type_ {
+                    if let ParseConfigurationType::None = option.r#type {
                         options.insert(option.long.to_string(), None);
 
                         return (arguments, options, None);
@@ -91,7 +91,7 @@ pub fn parse_configuration(configuration: &ParseConfiguration) -> Result<Configu
                         options,
                         Some(FoldState {
                             key: option.long.to_string(),
-                            type_: option.type_.clone(),
+                            r#type: option.r#type.clone(),
                         }),
                     );
                 }
@@ -100,7 +100,7 @@ pub fn parse_configuration(configuration: &ParseConfiguration) -> Result<Configu
 
                 (arguments, options, None)
             }
-            Some(state) => match state.type_ {
+            Some(state) => match state.r#type {
                 ParseConfigurationType::None => (arguments, options, None),
                 _ => {
                     options.insert(state.key.to_string(), Some(arg.to_string()));

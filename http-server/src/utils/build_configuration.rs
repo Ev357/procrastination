@@ -49,10 +49,10 @@ pub fn build_configuration(
         .try_for_each(|option_configuration| {
             let argument = options.get(option_configuration.long);
             if let Some(argument) = argument {
-                return match option_configuration.type_ {
+                return match option_configuration.r#type {
                     ParseConfigurationType::None => match argument {
                         Some(argument) => {
-                            let result = option_configuration.type_.is_valid(argument);
+                            let result = option_configuration.r#type.is_valid(argument);
                             if result.is_ok() {
                                 parsed_arguments.insert(
                                     option_configuration.long.to_string(),
@@ -73,7 +73,7 @@ pub fn build_configuration(
                     },
                     _ => match argument {
                         Some(argument) => {
-                            let result = option_configuration.type_.is_valid(argument);
+                            let result = option_configuration.r#type.is_valid(argument);
                             if result.is_ok() {
                                 parsed_arguments.insert(
                                     option_configuration.long.to_string(),
