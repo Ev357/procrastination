@@ -1,8 +1,3 @@
-[package]
-name = "http-server"
-version = "0.1.0"
-edition = "2024"
-
-[dependencies]
-http-server-codegen = { path = "../http-server-codegen" }
-http-server-types = { path = "../http-server-types" }
+[workspace]
+resolver = "3"
+members = ["http-server", "http-server-codegen", "http-server-types"]
