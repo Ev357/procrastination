@@ -8,3 +8,10 @@ macro_rules! matrix {
         ])
     };
 }
+
+#[macro_export]
+macro_rules! ss {
+    ($x:expr) => {
+        crate::super_string::SuperString::new($x)
+    };
+}

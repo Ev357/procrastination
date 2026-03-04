@@ -1,18 +1,21 @@
 pub mod r#macro;
 pub mod matrix;
+pub mod super_string;
 
 fn main() {
     let a = matrix![
-        1, 2;
-        3, 4
+        ss!("a"), ss!("0"), ss!("0");
+        ss!("0"), ss!("1"), ss!("0");
+        ss!("0"), ss!("0"), ss!("1")
     ];
 
     let b = matrix![
-        5, 6, 7;
-        8, 9, 10
+        ss!("b"), ss!("c");
+        ss!("d"), ss!("e");
+        ss!("f"), ss!("g")
     ];
 
     let c = a.multiply(&b);
 
-    println!("{:#?}", c);
+    println!("{}", c);
 }
