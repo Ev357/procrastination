@@ -63,6 +63,8 @@ impl<
             }
         }
 
-        write!(f, "{}", output)
+        write!(f, "{}", output)?;
+
+        Ok(())
     }
 }
