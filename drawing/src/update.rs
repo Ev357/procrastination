@@ -51,8 +51,8 @@ pub fn update(model: &mut Model, msg: Message) -> Option<Message> {
             None
         }
         Message::Clear => {
-            model.history.push(model.pixels.clone());
             model.pixels.clear();
+            model.history.push(model.pixels.clone());
 
             None
         }
