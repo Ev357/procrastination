@@ -1,14 +1,13 @@
 use color_eyre::eyre::Result;
 
 use crate::{
-    handle_event::handle_event, running_state::RunningState, terminal::Terminal, update::update,
+    handle_event::handle_event, model::running_state::RunningState, terminal::Terminal,
+    update::update,
 };
 
 mod handle_event;
 mod message;
-mod mode;
 mod model;
-mod running_state;
 mod terminal;
 mod update;
 

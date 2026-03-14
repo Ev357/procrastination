@@ -8,10 +8,10 @@ impl Terminal {
         T: FnOnce(&mut Model) -> Option<Message>,
     {
         let mut model = self.model.clone();
-        update(&mut model);
+        let message = update(&mut model);
         self.render(&model)?;
         self.model = model;
 
-        Ok(None)
+        Ok(message)
     }
 }
