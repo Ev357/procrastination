@@ -9,22 +9,22 @@ use crate::{
 
 const TITLE: &str = " Color Picker ";
 const PALETTE: [Color; 16] = [
-    Color::Black,
+    Color::White,
+    Color::Grey,
     Color::DarkGrey,
+    Color::Black,
     Color::Red,
     Color::DarkRed,
-    Color::Green,
-    Color::DarkGreen,
     Color::Yellow,
     Color::DarkYellow,
+    Color::Green,
+    Color::DarkGreen,
+    Color::Cyan,
+    Color::DarkCyan,
     Color::Blue,
     Color::DarkBlue,
     Color::Magenta,
     Color::DarkMagenta,
-    Color::Cyan,
-    Color::DarkCyan,
-    Color::White,
-    Color::Grey,
 ];
 const SWATCH_WIDTH: u16 = 4;
 const MAX_SWATCHES_PER_ROW: usize = 5;
