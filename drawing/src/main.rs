@@ -10,6 +10,7 @@ mod message;
 mod model;
 mod terminal;
 mod update;
+mod widgets;
 
 fn main() -> Result<()> {
     color_eyre::install()?;

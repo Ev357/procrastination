@@ -3,10 +3,12 @@ use crossterm::event::{
     self, Event, KeyCode, KeyEventKind, KeyModifiers, MouseButton, MouseEventKind,
 };
 
-use crate::{message::Message, message::mouse::MouseMessage, model::Model};
+use crate::{
+    message::{Message, direction::Direction, mouse::MouseMessage},
+    model::Model,
+};
 
 pub fn handle_event(_: &Model) -> Result<Option<Message>> {
-    #[allow(clippy::single_match)]
     let messsage = match event::read()? {
         Event::Key(event) => match event.kind {
             KeyEventKind::Press => match event.code {
@@ -17,6 +19,13 @@ pub fn handle_event(_: &Model) -> Result<Option<Message>> {
                 KeyCode::Char('r') if event.modifiers.contains(KeyModifiers::CONTROL) => {
                     Some(Message::Redo)
                 }
+                KeyCode::Char('h') | KeyCode::Left => Some(Message::Direction(Direction::Left)),
+                KeyCode::Char('l') | KeyCode::Right => Some(Message::Direction(Direction::Right)),
+                KeyCode::Char('k') | KeyCode::Up => Some(Message::Direction(Direction::Up)),
+                KeyCode::Char('j') | KeyCode::Down => Some(Message::Direction(Direction::Down)),
+                KeyCode::Enter => Some(Message::Confirm),
+                KeyCode::Esc => Some(Message::Close),
+                KeyCode::Char('p') => Some(Message::ColorPicker),
                 _ => None,
             },
             _ => None,
